@@ -1,3 +1,17 @@
-<p>
-  ricette-item works!
-</p>
+ 
+ 
+ 
+ 
+ 
+ <a href="#" 
+      class="list-group-item clearfix"
+      (click)="onSelected()">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{ ricetta.name }}</h4>
+        <p class="list-group-item-text">{{ ricetta.desc }}</p>
+      </div>
+      <span class="pull-right">
+        <img [src]="ricetta.imgPath" alt="{{ ricetta.name }}" 
+          class="img-responsive" style="max-height: 50px;">
+      </span>
+    </a>

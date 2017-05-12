@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  featureSelected = 'ricette';
+
+  onRouteChange(route: string){
+    this.featureSelected = route;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Ricette } from '../ricette.model';
 @Component({
   selector: 'app-ricette-list',
@@ -6,6 +6,7 @@ import { Ricette } from '../ricette.model';
   styleUrls: ['./ricette-list.component.css']
 })
 export class RicetteListComponent implements OnInit {
+  @Output() ricettaCorrente = new EventEmitter<Ricette>();
   ricette: Ricette[] = [
     new Ricette('Ricetta 1', 'ricetta 1 test', 'http://www.pugliainesclusiva.it/wp-content/uploads/2014/10/fichi-secchi-pugliesi-con-vincotto.jpg'),
     new Ricette('Ricetta 2', 'ricetta 2 test', 'http://www.pugliainesclusiva.it/wp-content/uploads/2014/10/fichi-secchi-pugliesi-con-vincotto.jpg')
@@ -15,4 +16,7 @@ export class RicetteListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onRicettaSelezionata(ricetta: Ricette) {
+    this.ricettaCorrente.emit(ricetta);
+  }
 }

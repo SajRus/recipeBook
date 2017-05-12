@@ -6,19 +6,9 @@
 <hr>
 <div class="row">
   <div class="col-xs-12">
-    <!-->Item temporaneo della ricetta</!-->
-    <a href="#" 
-      class="list-group-item clearfix"
-      *ngFor="let ricetta of ricette">
-      <div class="pull-left">
-        <h4 class="list-group-item-heading">{{ ricetta.name }}</h4>
-        <p class="list-group-item-text">{{ ricetta.desc }}</p>
-      </div>
-      <span class="pull-right">
-        <img [src]="ricetta.imgPath" alt="{{ ricetta.name }}" 
-          class="img-responsive" style="max-height: 50px;">
-      </span>
-    </a>
-    <!--app-ricette-item></app-ricette-item-->
+   <app-ricette-item 
+      *ngFor="let ricettaEl of ricette"
+      [ricetta]="ricettaEl"
+      (rirettaSelezionata)="onRicettaSelezionata(ricettaEl)"></app-ricette-item>
   </div>
 </div>
