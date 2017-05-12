@@ -11,6 +11,7 @@ import { RicetteItemComponent } from './ricette/ricette-list/ricette-item/ricett
 import { HeaderComponent } from './header/header.component';
 import { ListaSpesaComponent } from './lista-spesa/lista-spesa.component';
 import { ListaSpesaEditComponent } from './lista-spesa/lista-spesa-edit/lista-spesa-edit.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ListaSpesaEditComponent } from './lista-spesa/lista-spesa-edit/lista-sp
     RicetteItemComponent,
     HeaderComponent,
     ListaSpesaComponent,
-    ListaSpesaEditComponent
+    ListaSpesaEditComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
