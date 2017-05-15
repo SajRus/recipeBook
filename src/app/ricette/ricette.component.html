@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-5">
-    <app-ricette-list (ricettaCorrente)="ricettaEl = $event" ></app-ricette-list>
+    <app-ricette-list></app-ricette-list>
   </div>
   <div class="col-md-7">
     <app-ricette-dettaglio
-    *ngIf="ricettaEl; else noData"
-    [ricetta]="ricettaEl"></app-ricette-dettaglio>
+    *ngIf="ricettaSelezionata; else noData"
+    [ricetta]="ricettaSelezionata"></app-ricette-dettaglio>
     
     <ng-template #noData>
       <p>Seleziona un elemento dalla lista!</p>

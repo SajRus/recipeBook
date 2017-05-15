@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Ricette } from '../ricette.model'
+import { Ricette } from '../ricette.model';
+import { ListaSpesaService } from '../../lista-spesa/lista-spesa.service';
 
 @Component({
     selector: 'app-ricette-dettaglio',
@@ -8,4 +9,9 @@ import { Ricette } from '../ricette.model'
 
 export class RicetteDettaglio {
     @Input() ricetta: Ricette;
+
+    constructor(private lsService: ListaSpesaService){}
+    addIngredientiAllaListaSpesa(){
+        this.lsService.addIngredienti(this.ricetta.ingredienti);
+    }
 }
