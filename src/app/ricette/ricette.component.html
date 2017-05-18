@@ -3,13 +3,14 @@
     <app-ricette-list></app-ricette-list>
   </div>
   <div class="col-md-7">
-    <app-ricette-dettaglio
+    <!--<app-ricette-dettaglio
     *ngIf="ricettaSelezionata; else noData"
-    [ricetta]="ricettaSelezionata"></app-ricette-dettaglio>
+    [ricetta]="ricettaSelezionata"></app-ricette-dettaglio>-->
+    <router-outlet></router-outlet>
     
-    <ng-template #noData>
+    <!--<ng-template #noData>
       <p>Seleziona un elemento dalla lista!</p>
-    </ng-template>
+    </ng-template>-->
     
     <!--<p #noData>Seleziona un elemento dalla lista!</p>-->
   </div>

@@ -12,6 +12,9 @@ import { HeaderComponent } from './header/header.component';
 import { ListaSpesaComponent } from './lista-spesa/lista-spesa.component';
 import { ListaSpesaEditComponent } from './lista-spesa/lista-spesa-edit/lista-spesa-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { AppRoutingModule } from './app-routing.module';
+import { RicetteStartComponent } from './ricette/ricette-start/ricette-start.component';
+import { RicetteEditComponent } from './ricette/ricette-edit/ricette-edit.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,15 @@ import { DropdownDirective } from './shared/dropdown.directive';
     HeaderComponent,
     ListaSpesaComponent,
     ListaSpesaEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    RicetteStartComponent,
+    RicetteEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
