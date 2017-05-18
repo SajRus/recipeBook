@@ -13,11 +13,10 @@ export class RicetteDettaglio implements OnInit{
     ricetta: Ricette;
     id: number;
 
-    constructor(private lsService: ListaSpesaService, 
-                private ricettaService: RicetteService,
+    constructor( private ricettaService: RicetteService,
                 private route: ActivatedRoute){}
     addIngredientiAllaListaSpesa(){
-        this.lsService.addIngredienti(this.ricetta.ingredienti);
+        this.ricettaService.addIngredientiListaSpesa(this.ricetta.ingredienti);
     }
 
     ngOnInit(){

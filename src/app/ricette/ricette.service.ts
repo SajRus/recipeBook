@@ -1,8 +1,10 @@
 
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Ricette } from './ricette.model';
 import { Ingredienti } from '../shared/app.ingredienti.model';
+import { ListaSpesaService } from '../lista-spesa/lista-spesa.service';
 
+@Injectable()
 export class RicetteService {
 
     ricettaSelezionata = new EventEmitter<Ricette>();
@@ -25,6 +27,12 @@ export class RicetteService {
                 new Ingredienti('Uova', 2)
             ])
     ];
+
+    constructor(private lsService: ListaSpesaService) { }
+
+    addIngredientiListaSpesa(ingredienti: Ingredienti[]) {
+        this.lsService.addIngredienti(ingredienti);
+    }
 
     getRicette() {
         return this.ricette.slice();
