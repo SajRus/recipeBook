@@ -15,8 +15,12 @@
                 class="btn btn-primary dropdown-toggle">
                 Gestione Ricette <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Aggiungi a lista spesa</a></li>
-                    <li><a href="#">Modifica ricetta</a></li>
+                    <li>
+                        <a (click)="addIngredienti()" style="cursor: pointer">
+                            Aggiungi a lista spesa
+                            </a>
+                        </li>
+                    <li><a routerLink="edit" style="cursor:pointer">Modifica ricetta</a></li>
                     <li><a href="#">Cancella ricetta</a></li>
                 </ul>
         </div>
@@ -30,6 +34,11 @@
 
 <div class="row">
     <div class="col-xs-12">
-        Ingredienti
+        <ul class="list-goup">
+            <li class="list-group-item" 
+                *ngFor="let ingrediente of ricetta.ingredienti">
+                {{ ingrediente.name}} - {{ingrediente.qt}}
+            </li>
+        </ul>
     </div>
 </div>

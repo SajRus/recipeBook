@@ -1,9 +1,10 @@
-<app-header (selezione)="onRouteChange($event)"></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-ricette *ngIf="featureSelected === 'ricette'"></app-ricette>
-      <app-lista-spesa *ngIf="featureSelected !== 'ricette'"></app-lista-spesa>
+      <!--<app-ricette *ngIf="featureSelected === 'ricette'"></app-ricette>
+      <app-lista-spesa *ngIf="featureSelected !== 'ricette'"></app-lista-spesa>-->
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
