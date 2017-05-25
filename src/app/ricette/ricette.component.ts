@@ -2,7 +2,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { Ricette } from './ricette.model';
+// import { Ricette } from './ricette.model';
 import { RicetteService } from './ricette.service';
 
 @Component({
@@ -12,16 +12,16 @@ import { RicetteService } from './ricette.service';
   providers: [RicetteService]
 })
 export class RicetteComponent implements OnInit {
- ricettaSelezionata: Ricette;
-  constructor(private ricetteService: RicetteService) { }
+//  ricettaSelezionata: Ricette;
+  constructor(/*private ricetteService: RicetteService*/) { }
 
   ngOnInit() {
-    this.ricetteService.ricettaSelezionata.subscribe(
-      (ricetta: Ricette) => {
-        this.ricettaSelezionata = ricetta;
-        console.log(ricetta);
-      }
-    )
+    // this.ricetteService.ricettaSelezionata.subscribe(
+    //   (ricetta: Ricette) => {
+    //     this.ricettaSelezionata = ricetta;
+    //     console.log(ricetta);
+    //   }
+    // )
   }
 
 }
