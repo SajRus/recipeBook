@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ricette } from '../ricette.model';
 import { ListaSpesaService } from '../../lista-spesa/lista-spesa.service';
 import { RicetteService } from '../ricette.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Routes, Router } from '@angular/router';
 
 @Component({
     selector: 'app-ricette-dettaglio',
@@ -14,7 +14,8 @@ export class RicetteDettaglio implements OnInit{
     id: number;
 
     constructor( private ricettaService: RicetteService,
-                private route: ActivatedRoute){}
+                private route: ActivatedRoute,
+                private router: Router){}
     addIngredientiAllaListaSpesa(){
         this.ricettaService.addIngredientiListaSpesa(this.ricetta.ingredienti);
     }
@@ -29,5 +30,9 @@ export class RicetteDettaglio implements OnInit{
                 this.ricetta = this.ricettaService.getRicetta(this.id);
             }
         )
+    }
+    onDeleteRicetta(){
+        this.ricettaService.deleteRicetta(this.id);
+        this.router.navigate(['/ricette']);
     }
 }

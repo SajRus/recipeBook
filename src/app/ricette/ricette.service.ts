@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Ricette } from './ricette.model';
 import { Ingredienti } from '../shared/app.ingredienti.model';
 import { ListaSpesaService } from '../lista-spesa/lista-spesa.service';
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class RicetteService {
 
     // ricettaSelezionata = new EventEmitter<Ricette>();
+    ricetteChanged = new Subject<Ricette[]>();
 
     private ricette: Ricette[] = [
         new Ricette(
@@ -40,5 +42,20 @@ export class RicetteService {
 
     getRicetta(id: number) {
         return this.ricette[id];
+    }
+
+    addRicetta(ricetta: Ricette){
+        this.ricette.push(ricetta);
+        this.ricetteChanged.next(this.ricette.slice());
+    }
+
+    updateRicetta(index: number, ricetta: Ricette){
+        this.ricette[index] = ricetta;
+        this.ricetteChanged.next(this.ricette.slice());
+    }
+
+    deleteRicetta(index: number){
+        this.ricette.splice(index, 1);
+        this.ricetteChanged.next(this.ricette.slice());
     }
 }

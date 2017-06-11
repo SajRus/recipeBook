@@ -21,9 +21,13 @@ export class ListaSpesaComponent implements OnInit, OnDestroy {
     )
   }
 
-ngOnDestroy() {
-  //Called once, before the instance is destroyed.
-  //Add 'implements OnDestroy' to the class.
-  this.subscription.unsubscribe();
-}
+  ngOnDestroy() {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscription.unsubscribe();
+  }
+
+  onItemEdit(i: number) {
+      this.listaSpesaService.ingredienteEditing.next(i);
+  }
 }

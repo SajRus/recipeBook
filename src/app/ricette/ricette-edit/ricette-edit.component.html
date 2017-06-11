@@ -1,6 +1,90 @@
-<p *ngIf="editMode">
-  ricette-edit works!
-</p>
-<p *ngIf="!editMode">
-  ricette-New works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="ricettaForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button 
+            type="submit" 
+            class="btn btn-success"
+            [disabled]="!ricettaForm.valid">Salva</button>
+          <button 
+            type="button" 
+            class="btn btn-danger"
+            (click)="onDelete()">Cancella</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Nome ricetta</label>
+            <input 
+              type="text" 
+              id="name" 
+              class="form-control"
+              formControlName="name">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="url">Url immagine</label>
+            <input 
+              type="text" 
+              id="url" 
+              class="form-control"
+              formControlName="imgPath"
+              #previewImg>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="previewImg.value" alt="" class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="dettaglio">Dettaglio ricetta</label>
+            <textarea type="text" 
+              id="dettaglio" 
+              class="form-control" 
+              formControlName="desc"
+              rows="5"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="ingredienti">
+          <div class="row" 
+            *ngFor="let ingredienteCrtl of ricettaForm.get('ingredienti').controls; let i = index"
+            [formGroupName]="i">
+            <div class="col-xs-8">
+              <input type="text"
+                class="form-control"
+                formControlName="name">
+            </div>
+            <div class="col-xs-2">
+              <input type="number"
+                class="form-control"
+                formControlName="amount">
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-danger"
+                (click)="onDeleteIngrediente(i)">X</button>
+            </div> 
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="button" class="btn btn-success"
+              (click)="onAddIngrediente()">Aggiungi ingrediente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
