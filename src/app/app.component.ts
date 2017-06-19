@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaSpesaService } from './lista-spesa/lista-spesa.service';
-
 import * as firebase from 'firebase';
 
 @Component({

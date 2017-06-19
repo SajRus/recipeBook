@@ -8,40 +8,40 @@ import { AuthService } from "app/auth/auth.service";
 @Injectable()
 export class DataStorageService {
     constructor(private http: Http,
-                private ricetteService: RicetteService,
-                private authService: AuthService
-                ) { }
-    
+        private ricetteService: RicetteService,
+        private authService: AuthService
+    ) { }
+
 
     storeData() {
         const token = this.authService.getToken();
-
+        const ricette: Ricette[] = this.ricetteService.getRicette();
         return this.http.put(
             'https://libro-delle-ricette.firebaseio.com/ricette.json?auth=' + token,
-            this.ricetteService.getRicette()
+            ricette
         )
     }
 
-    getRicette(){
-        const token = this.authService.getToken(); 
+    getRicette() {
+        const token = this.authService.getToken();
 
         this.http.get('https://libro-delle-ricette.firebaseio.com/ricette.json?auth=' + token)
-        .map(
+            .map(
             (response: Response) => {
                 const ricette: Ricette[] = response.json();
-                for(let ricetta of ricette){
-                    if(!ricetta['ingredienti']){
+                for (let ricetta of ricette) {
+                    if (!ricetta['ingredienti']) {
                         ricetta['ingredienti'] = [];
                     }
                 }
                 return ricette;
             }
 
-        )
-        .subscribe(
+            )
+            .subscribe(
             (ricette: Ricette[]) => {
                 this.ricetteService.setRicette(ricette);
             }
-        )
+            )
     }
 }

@@ -44,13 +44,13 @@ export class RicetteService {
         return this.ricette[id];
     }
 
-    addRicetta(ricetta: Ricette){
-        this.ricette.push(ricetta);
+    addRicetta(newRicette: Ricette){
+        this.ricette.push(newRicette);
         this.ricetteChanged.next(this.ricette.slice());
     }
 
-    setRicette(ricette: Ricette[]){
-        this.ricette = ricette;
+    setRicette(newRicette: Ricette[]){
+        this.ricette = newRicette;
         
         this.ricetteChanged.next(this.ricette.slice());
     }

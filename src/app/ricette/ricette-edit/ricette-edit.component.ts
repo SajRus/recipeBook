@@ -95,9 +95,9 @@ export class RicetteEditComponent implements OnInit {
     // );
 
     if(this.editMode){
-      this.ricettaService.updateRicetta(this.id, this.ricettaForm.value);
+      this.ricettaService.updateRicetta(this.id, <Ricette>this.ricettaForm.value);
     }else{
-      this.ricettaService.addRicetta(this.ricettaForm.value);
+      this.ricettaService.addRicetta(<Ricette>this.ricettaForm.value);
     }
     this.router.navigate(['../'], {relativeTo: this.route});
     console.log(this.ricettaForm);
