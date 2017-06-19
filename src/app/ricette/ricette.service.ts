@@ -49,6 +49,12 @@ export class RicetteService {
         this.ricetteChanged.next(this.ricette.slice());
     }
 
+    setRicette(ricette: Ricette[]){
+        this.ricette = ricette;
+        
+        this.ricetteChanged.next(this.ricette.slice());
+    }
+
     updateRicetta(index: number, ricetta: Ricette){
         this.ricette[index] = ricetta;
         this.ricetteChanged.next(this.ricette.slice());

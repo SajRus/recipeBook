@@ -15,6 +15,13 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { RicetteStartComponent } from './ricette/ricette-start/ricette-start.component';
 import { RicetteEditComponent } from './ricette/ricette-edit/ricette-edit.component';
+import { RicetteService } from "app/ricette/ricette.service";
+import { DataStorageService } from "app/shared/data-storage.service";
+import { ListaSpesaService } from "app/lista-spesa/lista-spesa.service";
+import { SingupComponent } from './auth/singup/singup.component';
+import { SinginComponent } from './auth/singin/singin.component';
+import { AuthService } from "app/auth/auth.service";
+import { AuthGuard } from "app/auth/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +35,9 @@ import { RicetteEditComponent } from './ricette/ricette-edit/ricette-edit.compon
     ListaSpesaEditComponent,
     DropdownDirective,
     RicetteStartComponent,
-    RicetteEditComponent
+    RicetteEditComponent,
+    SingupComponent,
+    SinginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,7 @@ import { RicetteEditComponent } from './ricette/ricette-edit/ricette-edit.compon
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [RicetteService, DataStorageService, ListaSpesaService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { DataStorageService } from "app/shared/data-storage.service";
+import { Response } from '@angular/http'; 
+import { AuthService } from "app/auth/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -6,8 +9,22 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+  constructor(private dataStorage: DataStorageService, 
+  private authService: AuthService) { }
   ngOnInit() {
   }
   
+  onSalvaRicette(){
+    this.dataStorage.storeData().subscribe(
+      (response: Response) => console.log(response)
+    )
+  }
+
+  onAggiornaRicette(){
+    this.dataStorage.getRicette();
+  }
+
+  onLogout(){
+    this.authService.logout();
+  }
 }

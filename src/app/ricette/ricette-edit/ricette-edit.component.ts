@@ -99,7 +99,7 @@ export class RicetteEditComponent implements OnInit {
     }else{
       this.ricettaService.addRicetta(this.ricettaForm.value);
     }
-
+    this.router.navigate(['../'], {relativeTo: this.route});
     console.log(this.ricettaForm);
   }
 }
