@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { DataStorageService } from "app/shared/data-storage.service";
-import { Response } from '@angular/http'; 
+import { Response } from '@angular/http';
 import { AuthService } from "app/auth/auth.service";
 
 @Component({
@@ -9,22 +9,24 @@ import { AuthService } from "app/auth/auth.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private dataStorage: DataStorageService, 
-  private authService: AuthService) { }
+  constructor(private dataStorage: DataStorageService,
+    private authService: AuthService) {}
+
+    authSrv = this.authService.isAuthenticated();
   ngOnInit() {
   }
-  
-  onSalvaRicette(){
+
+  onSalvaRicette() {
     this.dataStorage.storeData().subscribe(
       (response: Response) => console.log(response)
     )
   }
 
-  onAggiornaRicette(){
+  onAggiornaRicette() {
     this.dataStorage.getRicette();
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logout();
   }
 }

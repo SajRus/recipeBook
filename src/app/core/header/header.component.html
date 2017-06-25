@@ -10,13 +10,13 @@
         <li routerLinkActive="active"><a [routerLink]="['./lista-spesa']">Lista della spesa</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <ng-template [ngIf]="!authService.isAuthenticated()">
+        <ng-template [ngIf]="!authSrv">
           <li><a routerLink="/singup">Registrazione</a></li>
           <li><a routerLink="/singin">Login</a></li>
         </ng-template>
         
-        <li *ngIf="authService.isAuthenticated()"><a (click)="onLogout()">Logout</a></li>
-        <li *ngIf="authService.isAuthenticated()" class="dropdown" appDropdown>
+        <li *ngIf="authSrv"><a (click)="onLogout()">Logout</a></li>
+        <li *ngIf="authSrv" class="dropdown" appDropdown>
           <a href="#" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a style="cursor:pointer" (click)="onSalvaRicette()">Salva</a></li>

@@ -36,7 +36,9 @@ export class RicetteEditComponent implements OnInit {
   onDeleteIngrediente(index: number){
     (<FormArray>this.ricettaForm.get('ingredienti')).removeAt(index);
   }
-
+  getRicetteControls(){
+    return (<FormArray>this.ricettaForm.get('ingredienti')).controls;
+  }
   onAddIngrediente() {
     (<FormArray>this.ricettaForm.get('ingredienti')).push(
       new FormGroup({
