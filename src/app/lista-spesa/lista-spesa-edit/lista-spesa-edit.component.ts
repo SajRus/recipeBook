@@ -1,49 +1,107 @@
-<<<<<<< HEAD
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { Ingredienti } from '../../shared/app.ingredienti.model';
-import { ListaSpesaService } from "app/lista-spesa/lista-spesa.service";
-=======
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Ingredienti } from '../../shared/app.ingredienti.model';
-import { ListaSpesaService } from '../lista-spesa.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
+import { RicetteService } from "app/ricette/ricette.service";
+import { Ricette } from "app/ricette/ricette.model";
 
->>>>>>> a9219a16ca6e889b88ca4abdd58cddb7ed19e20c
 @Component({
-  selector: 'app-lista-spesa-edit',
-  templateUrl: './lista-spesa-edit.component.html',
-  styleUrls: ['./lista-spesa-edit.component.css']
+  selector: 'app-ricette-edit',
+  templateUrl: './ricette-edit.component.html',
+  styleUrls: ['./ricette-edit.component.css']
 })
-export class ListaSpesaEditComponent implements OnInit {
-<<<<<<< HEAD
-  @ViewChild('nIngrediente') nomeIngrediente: ElementRef;
-  @ViewChild('qIngrediente') qtIngrediente: ElementRef;
-  @Output() ingredienteAggiunto = new EventEmitter<Ingredienti>();
+export class RicetteEditComponent implements OnInit {
+  id: number;
+  editMode = false;
 
-=======
-  @ViewChild('nIngrediente') nomeIngrediente: ElementRef; 
-  @ViewChild('qIngrediente') qtIngrediente: ElementRef; 
-  
->>>>>>> a9219a16ca6e889b88ca4abdd58cddb7ed19e20c
-  constructor(private lsService: ListaSpesaService) { }
+  ricettaForm: FormGroup;
+  constructor(
+    private route: ActivatedRoute,
+    private ricettaService: RicetteService,
+    private router: Router) { }
 
   ngOnInit() {
-
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.editMode = params['id'] != null;
+        this.initForm();
+      }
+    )
   }
 
-<<<<<<< HEAD
-  addIngrediente() {
-    // this.ingredienteAggiunto.emit({
-    //   name: this.nomeIngrediente.nativeElement.value,
-    //   qt: this.qtIngrediente.nativeElement.value
-    // })
-    this.lsService.addIngrediente({
-      name: this.nomeIngrediente.nativeElement.value,
-      qt: this.qtIngrediente.nativeElement.value
+  onDelete(){
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  onDeleteIngrediente(index: number){
+    (<FormArray>this.ricettaForm.get('ingredienti')).removeAt(index);
+  }
+  getRicetteControls(){
+    return (<FormArray>this.ricettaForm.get('ingredienti')).controls;
+  }
+  onAddIngrediente() {
+    (<FormArray>this.ricettaForm.get('ingredienti')).push(
+      new FormGroup({
+        'name': new FormControl(null, Validators.required),
+        'amount': new FormControl(null, 
+        [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+      })
+    )
+  }
+
+  initForm() {
+    let ricettaName = '';
+    let ricettaImgPath = '';
+    let ricettaDesc = '';
+    let ricettaIngredienti = new FormArray([]);
+
+    if (this.editMode) {
+      const ricetta = this.ricettaService.getRicetta(this.id);
+
+      ricettaName = ricetta.name;
+      ricettaImgPath = ricetta.imgPath;
+      ricettaDesc = ricetta.desc;
+
+      if (ricetta['ingredienti']) {
+        for (let ingrediente of ricetta.ingredienti) {
+          ricettaIngredienti.push(
+            new FormGroup({
+              'name': new FormControl(
+                ingrediente.name,
+                Validators.required
+              ),
+              'amount': new FormControl(
+                ingrediente.amount,
+                [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]
+              )
+            })
+          )
+        }
+      }
+    }
+
+    this.ricettaForm = new FormGroup({
+      'name': new FormControl(ricettaName, Validators.required),
+      'imgPath': new FormControl(ricettaImgPath, Validators.required),
+      'desc': new FormControl(ricettaDesc, Validators.required),
+      'ingredienti': ricettaIngredienti
     })
-=======
-  addIngrediente(){
-    this.lsService.addIngrediente(new Ingredienti(this.nomeIngrediente.nativeElement.value
-    , this.qtIngrediente.nativeElement.value));
->>>>>>> a9219a16ca6e889b88ca4abdd58cddb7ed19e20c
+  }
+
+  onSubmit() {
+    // const newRicetta = new Ricette(
+    //   this.ricettaForm.value['name'], 
+    //   this.ricettaForm.value['desc'], 
+    //   this.ricettaForm.value['imgPath'], 
+    //   this.ricettaForm.value['ingredienti'] 
+    // );
+
+    if(this.editMode){
+      this.ricettaService.updateRicetta(this.id, <Ricette>this.ricettaForm.value);
+    }else{
+      this.ricettaService.addRicetta(<Ricette>this.ricettaForm.value);
+    }
+    this.router.navigate(['../'], {relativeTo: this.route});
+    console.log(this.ricettaForm);
   }
 }
