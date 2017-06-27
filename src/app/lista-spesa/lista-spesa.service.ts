@@ -1,48 +1,42 @@
-<<<<<<< HEAD
-import { Ingredienti } from "app/shared/app.ingredienti.model";
-import { EventEmitter } from "@angular/core";
-
-export class ListaSpesaService {
-    ingredientiAggiornati = new EventEmitter<Ingredienti[]>();
-    
-    private ingedienti: Ingredienti[] = [
-=======
-import { EventEmitter } from '@angular/core';
+// import { EventEmitter } from '@angular/core';
 import { Ingredienti } from '../shared/app.ingredienti.model';
+import { Subject } from "rxjs/Subject";
 
 export class ListaSpesaService {
-    ingredientiAggiornati = new EventEmitter<Ingredienti[]>();
+    // ingredientiAggiornati = new EventEmitter<Ingredienti[]>();
+    ingredientiAggiornati = new Subject<Ingredienti[]>();
+    ingredienteEditing = new Subject<number>();
+
     private ingredienti: Ingredienti[] = [
->>>>>>> a9219a16ca6e889b88ca4abdd58cddb7ed19e20c
         new Ingredienti('uova', 2),
         new Ingredienti('mele', 3)
     ]
 
     getIngredienti(){
-<<<<<<< HEAD
-        return this.ingedienti.slice();
-    }
-
-    addIngrediente(ingrediente: Ingredienti){
-        this.ingedienti.push(ingrediente);
-        this.ingredientiAggiornati.emit(this.ingedienti.slice());
-    }
-
-    addIngredienti(ingredienti: Ingredienti[]){
-        this.ingedienti.push(...ingredienti);
-        this.ingredientiAggiornati.emit(this.ingedienti.slice());
-=======
         return this.ingredienti.slice()
+    }
+
+    getIngrediente(id: number){
+        return this.ingredienti[id];
     }
 
     addIngrediente(ingrediente: Ingredienti){
         this.ingredienti.push(ingrediente);
-        this.ingredientiAggiornati.emit(this.ingredienti.slice());
+        this.ingredientiAggiornati.next(this.ingredienti.slice());
+    }
+
+    updateIngrediente(index: number, ingrediente: Ingredienti){
+        this.ingredienti[index] = ingrediente;
+        this.ingredientiAggiornati.next(this.ingredienti.slice());
     }
 
     addIngredienti(ingrediente: Ingredienti[]){
         this.ingredienti.push(...ingrediente);
-        this.ingredientiAggiornati.emit(this.ingredienti.slice());
->>>>>>> a9219a16ca6e889b88ca4abdd58cddb7ed19e20c
+        this.ingredientiAggiornati.next(this.ingredienti.slice());
+    }
+
+    deleteItem(index: number){
+        this.ingredienti.splice(index, 1);
+        this.ingredientiAggiornati.next(this.ingredienti.slice());
     }
 }
